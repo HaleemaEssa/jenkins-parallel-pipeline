@@ -38,6 +38,39 @@ pipeline {
         }
       }
     }
+    stage('Login to Dockerhub') {
+      parallel {
+        stage('On-Edge1') {
+          agent any
+          steps {
+            sh 'echo "rn-cloud" '
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          }
+        }
+        stage('On-Edge2') {
+          agent any
+          steps {
+            sh 'echo "edge1-run" '
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          }
+        }
+        stage('On-RPI') {
+          agent {label 'linuxslave1'}
+          steps {
+            sh 'echo "run-pi" '
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          }
+        }
+        stage('On-Cloud') {
+          agent {label 'aws'}
+          steps {
+            sh 'echo "run-pi" '
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          }
+        }
+        
+      }
+    }
     stage('CreateDockerImages') {
       parallel {
         stage('On-Edge1') {
@@ -72,40 +105,7 @@ pipeline {
       }
     }
     
-   stage('Login to Dockerhub') {
-      parallel {
-        stage('On-Edge1') {
-          agent any
-          steps {
-            sh 'echo "rn-cloud" '
-            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          }
-        }
-        stage('On-Edge2') {
-          agent any
-          steps {
-            sh 'echo "edge1-run" '
-            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          }
-        }
-        stage('On-RPI') {
-          agent {label 'linuxslave1'}
-          steps {
-            sh 'echo "run-pi" '
-            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          }
-        }
-        stage('On-Cloud') {
-          agent {label 'aws'}
-          steps {
-            sh 'echo "run-pi" '
-            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          }
-        }
-        
-      }
-    }
-    
+   
     stage('Run-Containers') {
       parallel {
         stage('On-Edge1') {
