@@ -11,6 +11,7 @@ pipeline {
           steps {
             sh 'echo "edge1"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
+            sh 'docker build -t haleema/docker-edge1:latest .'
 
           }
         }
@@ -19,6 +20,7 @@ pipeline {
           steps {
             sh 'echo "edge1"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge2.git'
+            sh 'docker build -t haleema/docker-edge2:latest .'
 
           }
         } 
@@ -27,6 +29,7 @@ pipeline {
           steps {
             sh 'echo "rpi" '
             git branch: 'main', url: 'https://github.com/HaleemaEssa/first_jenkins_project.git'
+            sh 'docker build -t haleema/docker-rpi:latest .'
           }
         }
         stage('On-aws') {
@@ -34,6 +37,7 @@ pipeline {
           steps {
             sh 'echo "cloud" '
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-cloud.git'
+            sh 'docker build -t haleema/docker-cloud:latest .'
           }
         }
       }
@@ -71,38 +75,7 @@ pipeline {
         } 
       }
     
-    stage('CreateDockerImages') {
-      parallel {
-        stage('On-Edge1') {
-          agent any
-          steps {
-            sh 'echo "rn-cloud" '
-            sh 'docker build -t haleema/docker-edge1:latest .'
-          }
-        }
-        stage('On-Edge2') {
-          agent any
-          steps {
-            sh 'echo "edge1-run" '
-            sh 'docker build -t haleema/docker-edge2:latest .'
-          }
-        }
-        stage('On-RPI') {
-          agent {label 'linuxslave1'}
-          steps {
-            sh 'echo "run-pi" '
-            sh 'docker build -t haleema/docker-rpi:latest .'
-          }
-        }
-        stage('On-Cloud') {
-          agent {label 'aws'}
-          steps {
-            sh 'echo "run-pi" '
-            sh 'docker build -t haleema/docker-cloud:latest .'
-          }
-        }
-       } 
-    }
+    
     
    
     stage('Run-Containers') {
