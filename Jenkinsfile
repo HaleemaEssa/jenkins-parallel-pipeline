@@ -72,7 +72,7 @@ pipeline {
       }
     
     stage('CreateDockerImages') {
-     
+      parallel {
         stage('On-Edge1') {
           agent any
           steps {
@@ -102,7 +102,7 @@ pipeline {
           }
         }
        } 
-     
+    }
     
    
     stage('Run-Containers') {
