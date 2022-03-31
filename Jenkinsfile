@@ -5,6 +5,7 @@ pipeline {
   agent none
   stages {
     stage('Git-clone') {
+      parallel {
         stage('On-Edge1') {
           agent any
           steps {
@@ -36,8 +37,9 @@ pipeline {
           }
         }
       }
-    
+  }
     stage('Login to Dockerhub') {
+      parallel {
         stage('On-Edge1') {
           agent any
           steps {
@@ -66,10 +68,11 @@ pipeline {
             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
           }
         }
-        
+        } 
       }
     
     stage('CreateDockerImages') {
+      parallel {
         stage('On-Edge1') {
           agent any
           steps {
@@ -98,11 +101,12 @@ pipeline {
             sh 'docker build -t haleema/docker-cloud:latest .'
           }
         }
-        
+       } 
       }
     
    
     stage('Run-Containers') {
+      parallel {
         stage('On-Edge1') {
           agent any
           steps {
@@ -134,6 +138,6 @@ pipeline {
         }
         
       }
-        
+  }   
   }
 }
