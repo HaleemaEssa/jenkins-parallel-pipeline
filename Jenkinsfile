@@ -22,7 +22,7 @@ pipeline {
             sh 'echo "edge1"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge2.git'
             sh 'docker build -t haleema/docker-edge2:latest .'
-            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
+            
 
           }
         } 
@@ -46,6 +46,12 @@ pipeline {
         }
       }
   }
+    stage('On-Edge2') {
+          agent any
+          steps {
+            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
+          }
+    }
     stage('Login to Dockerhub') {
       parallel {
         stage('On-Edge1') {
