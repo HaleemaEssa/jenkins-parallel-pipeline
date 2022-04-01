@@ -49,6 +49,7 @@ pipeline {
     stage('On-Edge2') {
           agent any
           steps {
+            docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
           }
     }
