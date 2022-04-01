@@ -48,8 +48,8 @@ pipeline {
             
           }
         }
-      }
-  }
+    //  }
+  //}
     //stage('On-Edge1-Build') {
       //    agent any
         //  steps {
