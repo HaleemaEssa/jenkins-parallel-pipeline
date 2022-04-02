@@ -76,12 +76,15 @@ pipeline {
          //   sh 'docker build -t haleema/docker-cloud:latest .'
           //}
     //}
-    stage('On-RPI-Run') {
-      agent {label 'linuxslave1'}
-          steps {
-            sh 'docker run --privileged -t haleema/docker-rpi'
-          }
-    }
+    stage('Run b/w RPI & Edge1') {
+      parallel {
+        stage('On-RPI-Run') {
+          agent {label 'linuxslave1'}
+            steps {
+              sh 'docker run --privileged -t haleema/docker-rpi'
+            }
+       }
+      
     stage('On-Edge1-Run') {
           agent any
           steps {
@@ -90,6 +93,10 @@ pipeline {
             sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
           }
     }
+      }
+    }
+    stage('Run b/w  Edge1 & cloud') {
+      parallel {
     
     stage('On-Edge2-Run') {
           agent any
@@ -103,6 +110,8 @@ pipeline {
           steps {
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-cloud'
           }
+    }
+      }
     }
     stage('Login to Dockerhub') {
       parallel {
