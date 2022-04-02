@@ -76,23 +76,25 @@ pipeline {
          //   sh 'docker build -t haleema/docker-cloud:latest .'
           //}
     //}
-    stage('On-Edge1-Run') {
-          agent any
-          steps {
-            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
-          }
-    }
     stage('On-RPI-Run') {
       agent {label 'linuxslave1'}
           steps {
             sh 'docker run --privileged -t haleema/docker-rpi'
           }
     }
+    stage('On-Edge1-Run') {
+          agent any
+          steps {
+            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
+            sh 'sleep 20'
+            sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
+          }
+    }
+    
     stage('On-Edge2-Run') {
           agent any
           steps {
-            sh 'sleep 10'
-            sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
+            
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
           }
     }
