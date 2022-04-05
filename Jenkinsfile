@@ -11,10 +11,11 @@ pipeline {
             try {
             sh 'echo "edge1"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
-            sh 'docker build -t haleema/docker-edge1:latest .'
-            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
+            //sh 'docker build -t haleema/docker-edge1:latest .'
             echo "Started stage A"
-              sleep(time: 60, unit: "SECONDS")
+            sleep(time: 60, unit: "SECONDS")
+            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
+            sleep(time: 60, unit: "SECONDS")
                } catch (Throwable e) {
                         echo "Caught ${e.toString()}"
                         currentBuild.result = "SUCCESS" 
