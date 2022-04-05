@@ -4,8 +4,15 @@ pipeline {
     }
   agent none
   stages {
+    stage('On-Edge1&pi') {
+      options {
+                timeout(time: 60, unit: "SECONDS")
+            }
+    parallel {
+       
        stage('On-Edge1') {
           agent any
+        
           steps {
             script { 
             try {
@@ -15,7 +22,7 @@ pipeline {
             echo "Started stage A"
             sleep(time: 60, unit: "SECONDS")
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
-            sleep(time: 60, unit: "SECONDS")
+            sleep(time: 3, unit: "SECONDS")
                } catch (Throwable e) {
                         echo "Caught ${e.toString()}"
                         currentBuild.result = "SUCCESS" 
@@ -35,6 +42,9 @@ pipeline {
             sh 'docker run --privileged -t haleema/docker-rpi'
           }
         }
+    }
+    }
+  
         stage('On-Edge2') {
           agent any
           steps {
