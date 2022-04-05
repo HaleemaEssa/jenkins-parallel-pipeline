@@ -5,14 +5,24 @@ pipeline {
   agent none
   stages {
     stage('On-RPI') {
+      options {
+                timeout(time: 60, unit: "SECONDS")
+            }
           agent {label 'linuxslave1'}
           steps {
+             script { 
+            try {
             sh 'echo "rpi" '
             git branch: 'main', url: 'https://github.com/HaleemaEssa/first_jenkins_project.git'
             //sh 'docker build -t haleema/docker-rpi:latest .'
             sh 'docker run --privileged -t haleema/docker-rpi'
+               } catch (Throwable e) {
+                        echo "Caught ${e.toString()}"
+                        currentBuild.result = "SUCCESS" 
+                    }
           }
         }
+    }
     stage('On-Edge1&pi') {
       options {
                 timeout(time: 60, unit: "SECONDS")
