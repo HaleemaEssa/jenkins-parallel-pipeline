@@ -58,7 +58,7 @@ pipeline {
             //sh 'docker build -t haleema/docker-edge2:latest .'
             //sh 'sleep 10'
             //sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
-            //sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
+            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
             
 
           }
