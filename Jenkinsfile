@@ -37,7 +37,7 @@ pipeline {
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
             //sh 'docker build -t haleema/docker-edge1:latest .'
             echo "Started stage A"
-            //sleep(time: 60, unit: "SECONDS")
+            sleep(time: 3, unit: "SECONDS")
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
             sleep(time: 2, unit: "SECONDS")
                } catch (Throwable e) {
@@ -45,6 +45,7 @@ pipeline {
                         currentBuild.result = "SUCCESS" 
                     }
               if (currentBuild.result = "SUCCESS") {
+              sh 'exit 0' 
               sh 'nano data1.csv'
               }
               
