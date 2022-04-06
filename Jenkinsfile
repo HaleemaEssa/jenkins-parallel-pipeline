@@ -41,13 +41,13 @@ pipeline {
             //sleep(time: 3, unit: "SECONDS")
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
             sleep(time: 2, unit: "SECONDS")
-               } catch (Throwable e) {
+               } catch (Exception e) {
                         echo "Caught ${e.toString()}"
                         currentBuild.result = "SUCCESS" 
                     }
               if (currentBuild.result == 'SUCCESS') {
                 sh 'sleep 2'
-                //sh 'nano data.csv'
+                sh 'nano data.csv'
                 sh 'exit 0' 
               
               }
