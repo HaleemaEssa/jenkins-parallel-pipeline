@@ -16,6 +16,7 @@ pipeline {
             git branch: 'main', url: 'https://github.com/HaleemaEssa/first_jenkins_project.git'
             //sh 'docker build -t haleema/docker-rpi:latest .'
             sh 'docker run --privileged -t haleema/docker-rpi'
+            sleep(time: 4, unit: "SECONDS")
                } catch (Throwable e) {
                         echo "Caught ${e.toString()}"
                         currentBuild.result = "SUCCESS" 
@@ -37,7 +38,7 @@ pipeline {
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
             //sh 'docker build -t haleema/docker-edge1:latest .'
             echo "Started stage A"
-            sleep(time: 3, unit: "SECONDS")
+            //sleep(time: 3, unit: "SECONDS")
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
             sleep(time: 2, unit: "SECONDS")
                } catch (Throwable e) {
@@ -59,7 +60,7 @@ pipeline {
           steps {
             sh 'echo "edge1"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge2.git'
-            sh 'docker build -t haleema/docker-edge2:latest .'
+            //sh 'docker build -t haleema/docker-edge2:latest .'
             //sh 'sleep 10'
             //sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
