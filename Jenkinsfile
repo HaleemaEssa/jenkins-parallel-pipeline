@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('On-RPI') {
       options {
-                timeout(time: 120, unit: "SECONDS")
+                timeout(time: 60, unit: "SECONDS")
             }
           agent {label 'linuxslave1'}
           steps {
@@ -26,7 +26,7 @@ pipeline {
     }
     stage('On-Edge1&pi') {
       options {
-                timeout(time: 60, unit: "SECONDS")
+                timeout(time: 160, unit: "SECONDS")
             }
    
           agent any
