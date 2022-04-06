@@ -45,7 +45,7 @@ pipeline {
                         echo "Caught ${e.toString()}"
                         currentBuild.result = "SUCCESS" 
                     }
-              if (currentBuild.result = 'SUCCESS') {
+              if (currentBuild.result == 'SUCCESS') {
               sh 'exit 0' 
               sh 'nano data1.csv'
               }
