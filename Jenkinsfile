@@ -26,7 +26,7 @@ pipeline {
     }
     stage('On-Edge1&pi') {
       options {
-                timeout(time: 160, unit: "SECONDS")
+                timeout(time: 360, unit: "SECONDS")
             }
    
           agent any
