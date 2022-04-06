@@ -19,7 +19,7 @@ pipeline {
             sleep(time: 4, unit: "SECONDS")
                } catch (Throwable e) {
                         echo "Caught ${e.toString()}"
-                        currentBuild.result = "SUCCESS" 
+                        currentBuild.result = "SUCCESS" //currentBuild.result = 'SUCCESS'
                     }
           }
         }
@@ -45,7 +45,7 @@ pipeline {
                         echo "Caught ${e.toString()}"
                         currentBuild.result = "SUCCESS" 
                     }
-              if (currentBuild.result = "SUCCESS") {
+              if (currentBuild.result = 'SUCCESS') {
               sh 'exit 0' 
               sh 'nano data1.csv'
               }
