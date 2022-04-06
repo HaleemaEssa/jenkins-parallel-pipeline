@@ -46,8 +46,10 @@ pipeline {
                         currentBuild.result = "SUCCESS" 
                     }
               if (currentBuild.result == 'SUCCESS') {
-              sh 'exit 0' 
-              sh 'nano data1.csv'
+                sh 'sleep 2'
+                sh 'nano data1.csv'
+                sh 'exit 0' 
+              
               }
               
             }
