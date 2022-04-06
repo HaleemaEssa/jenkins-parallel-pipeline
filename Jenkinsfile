@@ -47,7 +47,7 @@ pipeline {
                     }
               if (currentBuild.result == 'SUCCESS') {
                 sh 'sleep 2'
-                //sh 'nano data1.csv'
+                sh 'nano data.csv'
                 sh 'exit 0' 
               
               }
