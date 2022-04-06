@@ -41,7 +41,7 @@ pipeline {
             //sleep(time: 3, unit: "SECONDS")
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
             sleep(time: 2, unit: "SECONDS")
-               } catch (Exception e) {
+               } catch (RuntimeException e) {
                         echo "Caught ${e.toString()}"
                         currentBuild.result = "SUCCESS" 
                     }
