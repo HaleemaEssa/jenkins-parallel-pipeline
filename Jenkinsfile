@@ -5,39 +5,6 @@ pipeline {
   agent none
   stages {
     
-    stage('On-Edge1&pi') {
-      options {
-                timeout(time: 360, unit: "SECONDS")
-            }
-   
-          agent any
-        
-          steps {
-            script { 
-            try {
-            sh 'echo "edge1"'
-            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
-            sh 'docker build -t haleema/docker-edge1:latest .'
-            echo "Started stage A"
-            sleep(time: 3, unit: "SECONDS")
-            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
-            sleep(time: 2, unit: "SECONDS")
-               } catch (Throwable e) {
-                        echo "Caught ${e.toString()}"
-                        currentBuild.result = "SUCCESS" 
-                        sh 'nano data.csv'             
-                    }
-              //if (currentBuild.result == 'SUCCESS') {
-               // sh 'sleep 2'
-                //sh 'nano data.csv'
-                //sh 'exit 0' 
-              
-              //}
-              
-            }
-
-          }
-        }
     stage('On-RPI') {
       options {
                 timeout(time: 60, unit: "SECONDS")
@@ -59,6 +26,40 @@ pipeline {
           }
         }
     }
+    stage('On-Edge1&pi') {
+      options {
+                timeout(time: 360, unit: "SECONDS")
+            }
+   
+          agent any
+        
+          steps {
+            script { 
+            try {
+            sh 'echo "edge1"'
+            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
+            sh 'docker build -t haleema/docker-edge1:latest .'
+            echo "Started stage A"
+            sleep(time: 3, unit: "SECONDS")
+            sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
+            sleep(time: 2, unit: "SECONDS")
+               } catch (Throwable e) {
+                        echo "Caught ${e.toString()}"
+                        currentBuild.result = "SUCCESS" 
+                        //sh 'nano data.csv'             
+                    }
+              //if (currentBuild.result == 'SUCCESS') {
+               // sh 'sleep 2'
+                //sh 'nano data.csv'
+                //sh 'exit 0' 
+              
+              //}
+              
+            }
+
+          }
+        }
+    
          
         stage('On-Edge2') {
           agent any
