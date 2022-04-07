@@ -28,7 +28,7 @@ pipeline {
     }
     stage('On-Edge1&pi') {
       options {
-                timeout(time: 360, unit: "SECONDS")
+                timeout(time: 70, unit: "SECONDS")
             }
    
           agent any
@@ -38,7 +38,7 @@ pipeline {
             try {
             sh 'echo "edge1"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
-            sh 'docker build -t haleema/docker-edge1:latest .'
+            //sh 'docker build -t haleema/docker-edge1:latest .'
             echo "Started stage A"
             sleep(time: 3, unit: "SECONDS")
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge1'
