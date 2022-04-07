@@ -86,6 +86,7 @@ pipeline {
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge2.git'
             //sh 'docker build -t haleema/docker-edge2:latest .'
             //sh 'sleep 10'
+            sleep(time: 3, unit: "SECONDS")
             //sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge2'
             
