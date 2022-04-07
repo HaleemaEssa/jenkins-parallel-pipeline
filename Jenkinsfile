@@ -98,8 +98,8 @@ pipeline {
             //sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge222'
             
 
-          }
-        } 
+         // }
+        //} 
     stage('On-aws') {
           agent {label 'aws'}
           steps {
