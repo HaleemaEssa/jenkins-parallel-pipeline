@@ -13,7 +13,7 @@ pipeline {
     
     stage('On-RPI') {
       options {
-                timeout(time: 20, unit: "SECONDS")
+                timeout(time: 30, unit: "SECONDS")
             }
           agent {label 'linuxslave1'}
           steps {
@@ -34,7 +34,7 @@ pipeline {
     }
     stage('On-Edge-receive and save data in data.csv file') {
       options {
-                timeout(time: 30, unit: "SECONDS")
+                timeout(time: 20, unit: "SECONDS")
             }
    
           agent any
@@ -69,7 +69,7 @@ pipeline {
          stage('On-Edge-Data Preprocessing') {
           agent any
           steps {
-            sh 'echo "edge3"'
+            sh 'echo "Data Preprocessing"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge3.git'
             //sh 'docker build -t haleema/docker-edge3:latest .'
             //sh 'sleep 10'
