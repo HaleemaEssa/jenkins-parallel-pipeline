@@ -102,7 +102,7 @@ pipeline {
         //} 
     stage('On-aws') {
            options {
-                timeout(time: 20, unit: "SECONDS")
+                timeout(time: 60, unit: "SECONDS")
             }     
           agent {label 'aws'}
           steps {
