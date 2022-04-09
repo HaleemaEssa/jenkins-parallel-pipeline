@@ -34,7 +34,7 @@ pipeline {
     }
     stage('On-Edge-receive and save data in data.csv file') {
       options {
-                timeout(time: 30, unit: "SECONDS")
+                timeout(time: 20, unit: "SECONDS")
             }
    
           agent any
