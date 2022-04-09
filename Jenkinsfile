@@ -102,7 +102,7 @@ pipeline {
         //} 
     stage('On-aws-Receive Data from Edge and Save it in data2.csv') {
            options {
-                timeout(time: 60, unit: "SECONDS")
+                timeout(time: 20, unit: "SECONDS")
             }     
           agent {label 'aws'}
           steps {
