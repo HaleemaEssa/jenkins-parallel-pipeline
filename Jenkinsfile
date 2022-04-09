@@ -32,7 +32,7 @@ pipeline {
           }
         }
     }
-    stage('On-Edge1&pi') {
+    stage('On-Edge-receive and save data in data.csv file') {
       options {
                 timeout(time: 30, unit: "SECONDS")
             }
@@ -66,7 +66,7 @@ pipeline {
           }
         }
     
-         stage('On-Edge3') {
+         stage('On-Edge-Data Preprocessing') {
           agent any
           steps {
             sh 'echo "edge3"'
@@ -86,7 +86,7 @@ pipeline {
 
           }
         } 
-        //stage('On-Edge2') {
+        //stage('On-Edge-Sendeng Processed Data to Cloud') {
           //agent any
           //steps {
             //sh 'echo "edge1"'
@@ -100,7 +100,7 @@ pipeline {
 
          // }
         //} 
-    stage('On-aws') {
+    stage('On-aws-Receive Data from Edge and Save it in data2.csv') {
            options {
                 timeout(time: 60, unit: "SECONDS")
             }     
@@ -121,7 +121,7 @@ pipeline {
             } 
           }
         }
-    stage('On-aws-visulization') {
+    stage('On-aws-Resampling Data and visulization Process') {
           agent {label 'aws'}
       steps {
             sh 'echo "cloud-visualization" '
