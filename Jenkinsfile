@@ -13,7 +13,7 @@ pipeline {
     
     stage('On-RPI') {
       options {
-                timeout(time: 60, unit: "SECONDS")
+                timeout(time: 20, unit: "SECONDS")
             }
           agent {label 'linuxslave1'}
           steps {
