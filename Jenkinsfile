@@ -34,7 +34,7 @@ pipeline {
     }
     stage('On-Edge-receive and save data in data.csv file') {
       options {
-                timeout(time: 20, unit: "SECONDS")
+                timeout(time: 30, unit: "SECONDS")
             }
    
           agent any
@@ -78,7 +78,7 @@ pipeline {
             sleep(time: 3, unit: "SECONDS")
             sh 'echo "sending data to cloud based on Cloud AMQP"'
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge222.git'
-            //sh 'docker build -t haleema/docker-edge222:latest .'
+            sh 'docker build -t haleema/docker-edge222:latest .'
             //sh 'sleep 10'
             //sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge222'
