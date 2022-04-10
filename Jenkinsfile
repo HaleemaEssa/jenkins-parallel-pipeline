@@ -126,7 +126,7 @@ pipeline {
       steps {
             sh 'echo "cloud-visualization" '
             git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-cloud-visualization.git'
-            //sh 'docker build -t haleema/docker-cloud2:latest .'
+            sh 'docker build -t haleema/docker-cloud2:latest .'
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-cloud2'
             
           }
