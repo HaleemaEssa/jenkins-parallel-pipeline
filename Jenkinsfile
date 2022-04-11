@@ -131,8 +131,8 @@ pipeline {
             
           }
         }
-    stage('PushImages to Dockerhub') {
-      parallel {
+    //stage('PushImages to Dockerhub') {
+     // parallel {
         stage('Push RPI Image') {
           agent {label 'linuxslave1'}
           steps {
@@ -164,8 +164,8 @@ pipeline {
         }
               
                 
-            }
-        } 
+           // }
+        //} 
     }
   
      post {
