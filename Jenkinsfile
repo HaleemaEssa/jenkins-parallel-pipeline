@@ -43,7 +43,7 @@ pipeline {
             script { 
             try {
             sh 'echo "edge1"'
-            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge1.git'
+            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge-rec.git'
             //sh 'docker build -t haleema/docker-edge1:latest .'
             echo "Started stage A"
             sleep(time: 3, unit: "SECONDS")
@@ -70,14 +70,14 @@ pipeline {
           agent any
           steps {
             sh 'echo "Data Preprocessing"'
-            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge3.git'
+            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge-proc.git'
             //sh 'docker build -t haleema/docker-edge3:latest .'
             //sh 'sleep 10'
             //sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
             sh 'docker run -v "${PWD}:/data" -t haleema/docker-edge3'
             sleep(time: 3, unit: "SECONDS")
             sh 'echo "sending data to cloud based on Cloud AMQP"'
-            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge222.git'
+            git branch: 'main', url: 'https://github.com/HaleemaEssa/jenkins-edge-send.git'
             //sh 'docker build -t haleema/docker-edge222:latest .'
             //sh 'sleep 10'
             //sh 'docker stop  haleema/docker-edge1; docker rm  haleema/docker-edge1'
