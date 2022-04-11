@@ -132,6 +132,7 @@ pipeline {
           }
         }
     stage('PushImages to Dockerhub') {
+      agent any
             steps {
                 sh 'echo "Push RPI Image" '
                 sh 'docker push haleema/docker-rpi:latest'
