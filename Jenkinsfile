@@ -135,15 +135,15 @@ pipeline {
             steps {
                 sh 'echo "Push RPI Image" '
                 sh 'docker push haleema/docker-rpi:latest'
-                sh 'echo "Push Edg1 Image" 
+                sh 'echo "Push Edg1 Image" ' 
                 sh 'docker push haleema/docker-edge1:latest'
-                sh 'echo "Push Edge2 Image" 
+                sh 'echo "Push Edge2 Image" '
                 sh 'docker push haleema/docker-edge3:latest'
-                sh 'echo "Push Edge3 Image" 
+                sh 'echo "Push Edge3 Image" '
                 sh 'docker push haleema/docker-edge222:latest'
-                sh 'echo "Push Cloud1 Image" 
+                sh 'echo "Push Cloud1 Image" '
                 sh 'docker push haleema/docker-cloud:latest'
-                sh 'echo "Push Cloud2 Image" 
+                sh 'echo "Push Cloud2 Image" '
                 sh 'docker push haleema/docker-cloud2:latest'
               
                 
