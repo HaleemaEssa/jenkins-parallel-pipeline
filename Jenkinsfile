@@ -140,45 +140,30 @@ pipeline {
                 sh 'docker push haleema/docker-rpi:latest'
           }
         }
-        stage('Push Edge1 Images') { 
+        stage('Push Edge Images') { 
           agent any
             steps {
                 sh 'echo "Push Edge1 Image" '
                 sh 'docker push haleema/docker-edge1:latest'
-            }
-        }
-           stage('Push Edge2 Images') { 
-          agent any
-            steps {
                 sh 'echo "Push Edge2 Image" '
                 sh 'docker push haleema/docker-edge3:latest'
-            }
-           }
-        stage('Push Edge3 Images') { 
-          agent any
-            steps {
                 sh 'echo "Push Edge3 Image" '
                 sh 'docker push haleema/docker-edge222:latest'
-                
+              
             }
         }
+           
         stage('Push Cloud Images') { 
           agent {label 'aws'}
             steps {
                 sh 'echo "Push Cloud1 Image" '
                 sh 'docker push haleema/docker-cloud:latest'
+                sh 'echo "Push Cloud2 Image" '
+                sh 'docker push haleema/docker-cloud2:latest'
                 
             }
         }
-    stage('Push Cloud1 Images') { 
-          agent {label 'aws'}
-            steps {
-              sh 'echo "Push Cloud2 Image" '
-              sh 'docker push haleema/docker-cloud2:latest'
-              
-                
-            }
-        } 
+    
     }
   
      post {
