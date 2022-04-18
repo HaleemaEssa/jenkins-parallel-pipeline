@@ -13,7 +13,7 @@ pipeline {
     
     stage('On-RPI') {
       options {
-                timeout(time: 600, unit: "SECONDS")
+                timeout(time: 20, unit: "SECONDS")
             }
           agent {label 'linuxslave1'}
           steps {
@@ -21,7 +21,7 @@ pipeline {
             try {
             sh 'echo "rpi" '
             git branch: 'main', url: 'https://github.com/HaleemaEssa/first_jenkins_project.git'
-            sh 'docker build -t haleema/docker-rpi:latest .'
+            //sh 'docker build -t haleema/docker-rpi:latest .'
             sleep(time: 3, unit: "SECONDS")
             sh 'docker run --privileged -t haleema/docker-rpi'
             sleep(time: 4, unit: "SECONDS")
