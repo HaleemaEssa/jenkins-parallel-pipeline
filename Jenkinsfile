@@ -21,7 +21,7 @@ pipeline {
             try {
             sh 'echo "rpi" '
             git branch: 'main', url: 'https://github.com/HaleemaEssa/first_jenkins_project.git'
-            //sh 'docker build -t haleema/docker-rpi:latest .'
+            sh 'docker build -t haleema/docker-rpi:latest .'
             sleep(time: 3, unit: "SECONDS")
             sh 'docker run --privileged -t haleema/docker-rpi'
             sleep(time: 4, unit: "SECONDS")
